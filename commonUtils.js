@@ -1,4 +1,4 @@
-const mergeSort = {
+export const mergeSort = {
   splitArrayInHalf(unsortedArray) {
     let leftSideMidPoint;
     let rightSideMidPoint;
@@ -66,4 +66,13 @@ const mergeSort = {
   },
 };
 
-export default mergeSort;
+export function removeDuplicatesFromSortedArray(array) {
+  const arrayCopy = [...array];
+  for (let i = 0; i < arrayCopy.length - 1; i += 1) {
+    if (arrayCopy[i] === arrayCopy[i + 1]) {
+      arrayCopy.splice(i, 1);
+      i -= 1;
+    }
+  }
+  return arrayCopy;
+}

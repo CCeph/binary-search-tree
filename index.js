@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-import mergeSort from "./commonUtils.js";
+import { mergeSort, removeDuplicatesFromSortedArray } from "./commonUtils.js";
 
 const binarySearchTree = {
   prettyPrint(node, prefix = "", isLeft = true) {
