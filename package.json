@@ -1,0 +1,19 @@
+{
+  "name": "eslint_prettier_template",
+  "version": "1.0.0",
+  "description": "A template repo that can be easily copied, forked, or downloaded as a ZIP file to quickly install ESLint and Prettier with HTML/CSS/JS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "prettier": "2.8.8"
+  }
+}
