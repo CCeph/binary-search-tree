@@ -2,6 +2,23 @@
 import mergeSort from "./commonUtils.js";
 
 const binarySearchTree = {
+  prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null) {
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  },
+
   createTreeNode(data, left = null, right = null) {
     return { data, left, right };
   },
@@ -37,4 +54,6 @@ const binarySearchTree = {
 
 const testArray = [1, 3, 5, 7, 8, 9, 10];
 
-console.log(binarySearchTree.buildTreeFromSortedArray(testArray));
+binarySearchTree.prettyPrint(
+  binarySearchTree.buildTreeFromSortedArray(testArray)
+);
