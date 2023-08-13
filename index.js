@@ -56,6 +56,6 @@ const binarySearchTree = {
   },
 };
 
-const testArray = [1, 3, 5, 7, 8, 9, 10];
+const testArray = [1, 3, 3, 8, 5, 7, 8, 9, 10];
 
 binarySearchTree.prettyPrint(binarySearchTree.buildTree(testArray).root);
