@@ -48,12 +48,14 @@ const binarySearchTree = {
 
   buildTree(array) {
     const sortedArray = mergeSort.sort(array);
-    return sortedArray;
+    const noDuplicatesArray = removeDuplicatesFromSortedArray(sortedArray);
+    const binaryTree = {
+      root: this.buildTreeFromSortedArray(noDuplicatesArray),
+    };
+    return binaryTree;
   },
 };
 
 const testArray = [1, 3, 5, 7, 8, 9, 10];
 
-binarySearchTree.prettyPrint(
-  binarySearchTree.buildTreeFromSortedArray(testArray)
-);
+binarySearchTree.prettyPrint(binarySearchTree.buildTree(testArray).root);
