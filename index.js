@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions
 import mergeSort from "./commonUtils.js";
 
 function createTreeNode(value, left = null, right = null) {
