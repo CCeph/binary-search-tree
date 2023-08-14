@@ -88,6 +88,20 @@ const binarySearchTree = {
         currentNode.right = binarySearchTree.createTreeNode(value, null, null);
       }
     },
+    levelOrder(callback) {
+      const queue = [this.root];
+      while (queue.length > 0) {
+        const currentNode = queue.shift();
+        callback(currentNode);
+
+        if (currentNode.left !== null) {
+          queue.push(currentNode.left);
+        }
+        if (currentNode.right !== null) {
+          queue.push(currentNode.right);
+        }
+      }
+    },
   },
 };
 
@@ -98,3 +112,8 @@ binarySearchTree.prettyPrint(testTree.root);
 console.log(testTree.find(11));
 testTree.insert(6);
 binarySearchTree.prettyPrint(testTree.root);
+
+function log(value) {
+  console.log(value);
+}
+testTree.levelOrder(log);
