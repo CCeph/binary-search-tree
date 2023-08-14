@@ -62,19 +62,39 @@ const binarySearchTree = {
       while (currentNode !== null && currentNode.data !== value) {
         if (currentNode.data > value) {
           currentNode = currentNode.left;
-        }
-
-        if (currentNode.data < value) {
+        } else if (currentNode.data < value) {
           currentNode = currentNode.right;
         }
       }
       return currentNode;
     },
+
+    insert(value) {
+      if (this.find(value) !== null) {
+        return;
+      }
+
+      let currentNode = this.root;
+      while (currentNode.left !== null && currentNode.right !== null) {
+        if (currentNode.data > value) {
+          currentNode = currentNode.left;
+        } else if (currentNode.data < value) {
+          currentNode = currentNode.right;
+        }
+      }
+      if (currentNode.data > value) {
+        currentNode.left = binarySearchTree.createTreeNode(value, null, null);
+      } else {
+        currentNode.right = binarySearchTree.createTreeNode(value, null, null);
+      }
+    },
   },
 };
 
-const testArray = [1, 3, 3, 8, 5, 7, 8, 9, 10];
+const testArray = [1, 3, 3, 5, 7, 9, 10];
 
 const testTree = binarySearchTree.buildTree(testArray);
 binarySearchTree.prettyPrint(testTree.root);
 console.log(testTree.find(11));
+testTree.insert(6);
+binarySearchTree.prettyPrint(testTree.root);
