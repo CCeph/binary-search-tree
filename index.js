@@ -52,10 +52,29 @@ const binarySearchTree = {
     const binaryTree = {
       root: this.buildTreeFromSortedArray(noDuplicatesArray),
     };
+    Object.setPrototypeOf(binaryTree, this.treePrototype);
     return binaryTree;
+  },
+
+  treePrototype: {
+    find(value) {
+      let currentNode = this.root;
+      while (currentNode !== null && currentNode.data !== value) {
+        if (currentNode.data > value) {
+          currentNode = currentNode.left;
+        }
+
+        if (currentNode.data < value) {
+          currentNode = currentNode.right;
+        }
+      }
+      return currentNode;
+    },
   },
 };
 
 const testArray = [1, 3, 3, 8, 5, 7, 8, 9, 10];
 
-binarySearchTree.prettyPrint(binarySearchTree.buildTree(testArray).root);
+const testTree = binarySearchTree.buildTree(testArray);
+binarySearchTree.prettyPrint(testTree.root);
+console.log(testTree.find(11));
