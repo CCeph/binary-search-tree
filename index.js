@@ -71,18 +71,21 @@ const binarySearchTree = {
 
     findParent(value) {
       let currentNode = this.root;
-      let parentNode = null;
+      let parentNode;
 
       if (value === this.root) {
         return "root";
       }
 
-      while (currentNode !== null && currentNode.data !== value) {
+      while (currentNode.data !== value) {
         parentNode = currentNode;
         if (currentNode.data > value) {
           currentNode = currentNode.left;
         } else if (currentNode.data < value) {
           currentNode = currentNode.right;
+        }
+        if (currentNode === null) {
+          return null;
         }
       }
       return parentNode;
@@ -110,7 +113,18 @@ const binarySearchTree = {
     },
 
     delete(value) {
-      return this.findParent(value);
+      const parentNode = this.findParent(value);
+      let currentNode;
+      switch (true) {
+        case parentNode.left.data === value:
+          currentNode = parentNode.left.data;
+          break;
+        case parentNode.right.data === value:
+          currentNode = parentNode.right.data;
+          break;
+        default:
+          return Error("Child not found");
+      }
     },
 
     levelOrder(callback) {
@@ -143,4 +157,4 @@ function log(value) {
 }
 testTree.levelOrder(log);
 
-console.log(testTree.findParent(5));
+console.log(testTree.findParent(2));
