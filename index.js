@@ -72,6 +72,11 @@ const binarySearchTree = {
     findParent(value) {
       let currentNode = this.root;
       let parentNode = null;
+
+      if (value === this.root) {
+        return "root";
+      }
+
       while (currentNode !== null && currentNode.data !== value) {
         parentNode = currentNode;
         if (currentNode.data > value) {
