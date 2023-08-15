@@ -73,8 +73,8 @@ const binarySearchTree = {
       let currentNode = this.root;
       let parentNode;
 
-      if (value === this.root) {
-        return "root";
+      if (value === this.root.data) {
+        return "No parent for root";
       }
 
       while (currentNode.data !== value) {
@@ -89,6 +89,14 @@ const binarySearchTree = {
         }
       }
       return parentNode;
+    },
+
+    findNextLargest(largestNode) {
+      let nextLargestNode = largestNode.right;
+      while (nextLargestNode.left !== null) {
+        nextLargestNode = nextLargestNode.left;
+      }
+      return nextLargestNode;
     },
 
     insert(value) {
@@ -115,16 +123,41 @@ const binarySearchTree = {
     delete(value) {
       const parentNode = this.findParent(value);
       let currentNode;
-      switch (true) {
-        case parentNode.left.data === value:
-          currentNode = parentNode.left.data;
-          break;
-        case parentNode.right.data === value:
-          currentNode = parentNode.right.data;
-          break;
-        default:
-          return Error("Child not found");
+      let side;
+
+      if (parentNode === null) {
+        return null;
       }
+
+      if (parentNode.data > value) {
+        currentNode = parentNode.left;
+        side = "left";
+      } else {
+        currentNode = parentNode.right;
+        side = "right";
+      }
+
+      if (currentNode.left === null && currentNode.right !== null) {
+        parentNode[side] = currentNode.right;
+      }
+
+      if (currentNode.left !== null && currentNode.right === null) {
+        parentNode[side] = currentNode.left;
+      }
+
+      if (currentNode.left === null && currentNode.right === null) {
+        parentNode[side] = null;
+      }
+
+      if (currentNode.left !== null && currentNode.right !== null) {
+        const nextLargestNode = this.findNextLargest(currentNode);
+        this.delete(nextLargestNode.data);
+        parentNode[side] = nextLargestNode;
+        nextLargestNode.left = currentNode.left;
+        nextLargestNode.right = currentNode.right;
+      }
+
+      return currentNode;
     },
 
     levelOrder(callback) {
@@ -157,4 +190,8 @@ function log(value) {
 }
 testTree.levelOrder(log);
 
-console.log(testTree.findParent(2));
+console.log(testTree.findParent(8));
+
+testTree.delete(9);
+
+binarySearchTree.prettyPrint(testTree.root);
