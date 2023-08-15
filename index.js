@@ -69,6 +69,20 @@ const binarySearchTree = {
       return currentNode;
     },
 
+    findParent(value) {
+      let currentNode = this.root;
+      let parentNode = null;
+      while (currentNode !== null && currentNode.data !== value) {
+        parentNode = currentNode;
+        if (currentNode.data > value) {
+          currentNode = currentNode.left;
+        } else if (currentNode.data < value) {
+          currentNode = currentNode.right;
+        }
+      }
+      return parentNode;
+    },
+
     insert(value) {
       if (this.find(value) !== null) {
         return;
@@ -76,6 +90,7 @@ const binarySearchTree = {
 
       let currentNode = this.root;
       while (currentNode.left !== null && currentNode.right !== null) {
+        console.log("inf");
         if (currentNode.data > value) {
           currentNode = currentNode.left;
         } else if (currentNode.data < value) {
@@ -88,6 +103,11 @@ const binarySearchTree = {
         currentNode.right = binarySearchTree.createTreeNode(value, null, null);
       }
     },
+
+    delete(value) {
+      return this.findParent(value);
+    },
+
     levelOrder(callback) {
       const queue = [this.root];
       while (queue.length > 0) {
@@ -117,3 +137,5 @@ function log(value) {
   console.log(value);
 }
 testTree.levelOrder(log);
+
+console.log(testTree.findParent(5));
