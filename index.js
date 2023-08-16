@@ -105,7 +105,7 @@ const binarySearchTree = {
       }
 
       let currentNode = this.root;
-      while (currentNode.left !== null && currentNode.right !== null) {
+      while (currentNode.left !== null || currentNode.right !== null) {
         if (currentNode.data > value) {
           currentNode = currentNode.left;
         } else if (currentNode.data < value) {
