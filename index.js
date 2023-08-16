@@ -106,7 +106,6 @@ const binarySearchTree = {
 
       let currentNode = this.root;
       while (currentNode.left !== null && currentNode.right !== null) {
-        console.log("inf");
         if (currentNode.data > value) {
           currentNode = currentNode.left;
         } else if (currentNode.data < value) {
@@ -244,6 +243,15 @@ const binarySearchTree = {
       }
       return false;
     },
+
+    rebalance() {
+      const newTreeArray = [];
+      const pushToArray = (node) => {
+        newTreeArray.push(node.data);
+      };
+      this.inorder(pushToArray);
+      this.root = binarySearchTree.buildTree(newTreeArray).root;
+    },
   },
 };
 
@@ -283,3 +291,9 @@ testTree.postorder(testPrint); */
 console.log(testTree.height(testTree.root));
 console.log(testTree.depth(testTree.root.right.right.right));
 console.log(testTree.isBalanced());
+testTree.insert(11);
+testTree.insert(4);
+binarySearchTree.prettyPrint(testTree.root);
+console.log(testTree.isBalanced());
+testTree.rebalance();
+binarySearchTree.prettyPrint(testTree.root);
