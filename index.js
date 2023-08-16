@@ -217,6 +217,23 @@ const binarySearchTree = {
       }
       return height;
     },
+
+    depth(node) {
+      const nodeToFind = node;
+
+      let currentNode = this.root;
+      let depth = 0;
+
+      while (currentNode !== null && currentNode !== nodeToFind) {
+        depth += 1;
+        if (currentNode.data > nodeToFind.data) {
+          currentNode = currentNode.left;
+        } else if (currentNode.data < nodeToFind.data) {
+          currentNode = currentNode.right;
+        }
+      }
+      return depth;
+    },
   },
 };
 
@@ -254,3 +271,4 @@ console.log("BREAK");
 testTree.postorder(testPrint); */
 
 console.log(testTree.height(testTree.root));
+console.log(testTree.depth(testTree.root.right.right.right));
