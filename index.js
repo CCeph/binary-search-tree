@@ -204,14 +204,27 @@ const binarySearchTree = {
       this.postorder(callback, currentNode.right);
       callback(currentNode);
     },
+
+    height(node) {
+      let currentNode = node;
+      let height = 0;
+      while (currentNode.right !== null) {
+        height += 1;
+        currentNode = currentNode.right;
+      }
+      if (currentNode.left !== null) {
+        height += 1;
+      }
+      return height;
+    },
   },
 };
 
-const testArray = [1, 3, 3, 5, 7, 9, 10];
+const testArray = [1, 2, 3, 3, 5, 6, 7, 9, 10];
 
 const testTree = binarySearchTree.buildTree(testArray);
 binarySearchTree.prettyPrint(testTree.root);
-console.log(testTree.find(11));
+/* console.log(testTree.find(11));
 testTree.insert(6);
 binarySearchTree.prettyPrint(testTree.root);
 
@@ -238,4 +251,6 @@ testTree.inorder(testPrint);
 
 console.log("BREAK");
 
-testTree.postorder(testPrint);
+testTree.postorder(testPrint); */
+
+console.log(testTree.height(testTree.root));
