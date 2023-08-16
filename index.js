@@ -234,6 +234,16 @@ const binarySearchTree = {
       }
       return depth;
     },
+
+    isBalanced() {
+      const rightHeight = this.height(this.root.right);
+      const leftHeight = this.height(this.root.left);
+
+      if (Math.abs(rightHeight - leftHeight) <= 1) {
+        return true;
+      }
+      return false;
+    },
   },
 };
 
@@ -272,3 +282,4 @@ testTree.postorder(testPrint); */
 
 console.log(testTree.height(testTree.root));
 console.log(testTree.depth(testTree.root.right.right.right));
+console.log(testTree.isBalanced());
