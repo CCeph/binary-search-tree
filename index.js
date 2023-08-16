@@ -174,6 +174,36 @@ const binarySearchTree = {
         }
       }
     },
+
+    preorder(callback, currentNode = this.root) {
+      if (currentNode === null) {
+        return;
+      }
+
+      callback(currentNode);
+      this.preorder(callback, currentNode.left);
+      this.preorder(callback, currentNode.right);
+    },
+
+    inorder(callback, currentNode = this.root) {
+      if (currentNode === null) {
+        return;
+      }
+
+      this.inorder(callback, currentNode.left);
+      callback(currentNode);
+      this.inorder(callback, currentNode.right);
+    },
+
+    postorder(callback, currentNode = this.root) {
+      if (currentNode === null) {
+        return;
+      }
+
+      this.postorder(callback, currentNode.left);
+      this.postorder(callback, currentNode.right);
+      callback(currentNode);
+    },
   },
 };
 
@@ -195,3 +225,17 @@ console.log(testTree.findParent(8));
 testTree.delete(9);
 
 binarySearchTree.prettyPrint(testTree.root);
+
+const testPrint = (node) => {
+  console.log(node);
+};
+
+testTree.preorder(testPrint);
+
+console.log("BREAK");
+
+testTree.inorder(testPrint);
+
+console.log("BREAK");
+
+testTree.postorder(testPrint);
